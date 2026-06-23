@@ -14,13 +14,16 @@ def scarica_pokemon(nome):
             print("Errore: Pokémon non trovato")
             return None
 
-    except requests.exceptions.RequestException:
-        print("Errore di connessione")
+    except requests.exceptions.ConnectionError:
+        print("Errore: nessuna connessione a Internet")
         return None
-
 
 if __name__ == "__main__":
     pokemon = scarica_pokemon("pikachu")
 
-    if pokemon:
+    if pokemon is not None:
         print("OK! Nome:", pokemon["name"])
+        print("ID:", pokemon["id"])
+        print("Altezza:", pokemon["height"])
+        print("Peso:", pokemon["weight"])
+
